@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imagine City: คืนสุดท้ายก่อนสีจะหายไป | SPU Digital Media</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600;700&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="--gray-filter: 100%;">
+
+  <header class="game-hud-header">
+    <div class="hud-logo">
+      <span class="pulse-dot"></span>
+      <span>IMAGINE CITY : COLOR RESTORATION</span>
+    </div>
+    <!-- เพิ่มข้อความตัวหนังสือเปลี่ยนสถานะบน HUD -->
+    <div class="hud-color-status" id="hud-status-text">🖤 สถานะเมือง: ขาว-ดำ (0%)</div>
+    <div class="hud-info">SDM • SPU</div>
+  </header>
+
+  <section id="start-screen" class="screen active">
+    <div class="game-container">
+      <div class="hero-banner-box">
+        <div class="floating-badge">✨ โครงการพิเศษ 28 พ.ย. 69</div>
+        <h1 class="game-title">คืนสุดท้ายก่อน<br><span class="neon-text">สีจะหายไป</span></h1>
+        <p class="game-desc">
+          เมืองแห่งจินตนาการกำลังกลายเป็นสีเทา[cite: 7] ทุกคำตอบของคุณจะช่วยปลุก "ตัวหนังสือและสีสัน" ให้กลับคืนสู่เมืองทีละสเต็ป[cite: 8, 13] พร้อมค้นหาสาขาที่ใช่ใน SPU!
+        </p>
+        <button id="start-btn" class="btn-neon">▶ เริ่มภารกิจกู้เมือง</button>
+      </div>
+      <div class="hero-visual-box">
+        <div class="neon-circle-bg"></div>
+        <img src="images/mascot.png" alt="Mascot" class="hero-mascot" onerror="this.src='https://via.placeholder.com/220/888/fff?text=GrayCity'">
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz-screen" class="screen">
+    <div class="game-play-layout">
+      <div class="play-left-pane">
+        <div class="scene-counter-badge" id="question-number">ฉาก 1 / 11</div>
+        <div class="scene-chapter-tag" id="chapter-title">บทที่ 1 - ตื่นขึ้นในเมืองไร้สี</div>
+        <h2 id="scene-title" class="scene-main-title">ตื่นขึ้นมา</h2>
+
+        <div class="game-screen-frame">
+          <img id="scene-img" src="" alt="Scene Image" onerror="this.style.display='none'; document.getElementById('screen-fallback').style.display='flex';">
+          <div id="screen-fallback" class="screen-fallback-content">
+            <span>🎨 RECOVERING COLOR...</span>
+          </div>
+        </div>
+        <p id="scene-desc" class="scene-lore-text">ทุกอย่างรอบตัวเธอเป็นสีเทา แต่มือของเธอยังขยับได้ และยังมีอะไรให้ทำอีกเยอะ[cite: 7]</p>
+      </div>
+
+      <div class="play-right-pane">
+        <div class="quest-box">
+          <h3 id="question-text">ดวงไฟลอยมาใกล้ ๆ แล้วกระซิบว่า...</h3>
+        </div>
+        <div id="answer-options" class="choice-cards-grid"></div>
+        <div class="play-footer-nav">
+          <button id="prev-btn" class="btn-sub-action">◀ ย้อนกลับ</button>
+          <span class="progress-indicator-text" id="dynamic-progress-text">กำลังฟื้นฟูสีสัน (0%)...</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="form-screen" class="screen">
+    <div class="game-container center-form-box">
+      <div class="form-card-hud">
+        <h2>🎫 ลงทะเบียนบัตรผ่านนักเดินทาง</h2>
+        <p>สีสันเกือบกลับมาครบถ้วนแล้ว! กรอกข้อมูลเพื่อบันทึกสถิติการกู้ภัยของคุณ[cite: 11]</p>
+        
+        <div class="input-group">
+          <label>ชื่อเล่นของคุณ</label>
+          <input type="text" id="f-name" placeholder="ระบุชื่อเล่น...">
+        </div>
+        <div class="input-group">
+          <label>ระดับการศึกษาปัจจุบัน</label>
+          <select id="f-level">
+            <option value="">-- เลือกชั้นปี --</option>
+            <option value="ม.4">ม.4</option>
+            <option value="ม.5">ม.5</option>
+            <option value="ม.6">ม.6</option>
+            <option value="ปวช.">ปวช.</option>
+            <option value="ปวส.">ปวส.</option>
+            <option value="อื่นๆ">อื่นๆ</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>ความถนัดหรือผลงานที่เคยทำ</label>
+          <select id="f-work">
+            <option value="">-- เลือกประเภท --</option>
+            <option value="วาดรูป">วาดรูป / Illustration</option>
+            <option value="ออกแบบ">ออกแบบกราฟิก / Branding</option>
+            <option value="ตัดต่อวิดีโอ">ตัดต่อวิดีโอ / Animation</option>
+            <option value="ทำเกม">ทำเกม / Interactive</option>
+            <option value="ยังไม่เคยเลย">ยังไม่เคยเลยแต่อยากลอง</option>
+          </select>
+        </div>
+        <button id="submit-form-btn" class="btn-neon">ยืนยันตัวตน & เปิดเวทีสีสัน ➔</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="result-screen" class="screen">
+    <div class="result-split-layout">
+      <div class="result-card-wrapper">
+        <div class="result-card" id="capture-card">
+          <div class="card-inner-border">
+            <div class="card-header">
+              <div class="top-title">✨ IMAGINE CITY • SPU ✨</div>
+              <div class="qr-box">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=https://www.spu.ac.th/fac/sdm/" alt="QR">
+                <span>SCAN TO PLAY</span>
+              </div>
+            </div>
+
+            <div class="character-stage">
+              <div class="bg-circle"></div>
+              <img id="res-char-img" src="images/mascot.png" alt="Character">
+            </div>
+
+            <div class="title-section">
+              <div class="rarity-tag">
+                <span class="badge-pill" id="res-code">SDM</span>
+                <div class="stars">✦ ✦ ✦</div>
+              </div>
+              <h1 id="res-title">ชื่อผลลัพธ์</h1>
+            </div>
+
+            <div class="info-box">
+              <p id="res-desc" class="main-desc">คำอธิบายตัวตน...</p>
+              <div class="middle-grid">
+                <div class="skill-detail">
+                  <div class="skill-icon">🏆</div>
+                  <div>
+                    <h4 id="res-career-title">อาชีพที่ใช่</h4>
+                    <p id="res-career-desc">Concept Artist</p>
+                  </div>
+                </div>
+                <div class="upload-wrapper">
+                  <span class="handwriting-top">ตัวจริง! ⤵</span>
+                  <label for="user-photo-input" class="upload-circle" id="upload-preview">
+                    <span>แปะรูปของคุณ<br>หรือผลงาน</span>
+                  </label>
+                  <input type="file" id="user-photo-input" accept="image/*" hidden>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <div class="footer-content">
+                <div class="footer-text">
+                  <h4 id="res-major-title">School of Digital Media</h4>
+                  <p id="res-major-desc">สาขาดิจิทัลอาร์ตส์</p>
+                </div>
+                <div class="faculty-logo">SDM<br><small>SPU</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-info-panel">
+        <div class="badge-success">🎉 เมืองกลับมามีสีสัน 100% แล้ว!</div>
+        <h2 class="result-heading">คุณคือนักเดินทางผู้กู้คืนโลก</h2>
+        <p class="result-sub">
+          พลังสร้างสรรค์ของคุณได้เติมแต่งเมืองให้กลับมามีชีวิตชีวา คลิกที่วงกลมเส้นประเพื่ออัปโหลดผลงาน แล้วแคปหน้าจอเก็บไว้ไปอวดเพื่อนๆ ได้เลย!
+        </p>
+        <button id="restart-btn" class="btn-neon-outline">🔄 เล่นใหม่อีกครั้ง</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
